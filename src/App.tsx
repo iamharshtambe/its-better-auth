@@ -1,6 +1,13 @@
 import { Edit, Trash2, Plus } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
 
 export default function App() {
+  const [newTask, setNewTask] = useState({ title: '', description: '' });
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
     <div className="min-h-screen bg-black py-8">
       <div className="max-w-2xl mx-auto px-4">
@@ -10,12 +17,18 @@ export default function App() {
         </h1>
 
         {/* Add Task Form */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-lg shadow-md p-6 mb-6"
+        >
           <div className="space-y-4">
             <div>
               <input
                 type="text"
                 placeholder="Enter Task"
+                onChange={(e) =>
+                  setNewTask((prev) => ({ ...prev, title: e.target.value }))
+                }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
@@ -24,6 +37,12 @@ export default function App() {
               <input
                 type="text"
                 placeholder="Enter Description"
+                onChange={(e) =>
+                  setNewTask((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
@@ -33,7 +52,7 @@ export default function App() {
               Add Task
             </button>
           </div>
-        </div>
+        </form>
 
         {/* Sample Tasks */}
         <div className="space-y-4">
