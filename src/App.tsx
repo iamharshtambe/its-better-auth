@@ -91,12 +91,11 @@ export default function App() {
         </form>
 
         {/* Sample Tasks */}
-
         {tasks.length === 0 ? (
           <p className="text-white">Loading Tasks...</p>
         ) : (
           tasks.map((task) => (
-            <div className="space-y-4">
+            <div key={task.id} className="my-4">
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {task.title}
