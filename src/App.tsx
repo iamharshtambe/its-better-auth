@@ -1,9 +1,17 @@
 import { Edit, Trash2, Plus } from 'lucide-react';
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { supabase } from './supabase-client';
+
+type Tasks = {
+  id: string;
+  title: string;
+  description: string;
+  created_at: string;
+}[];
 
 export default function App() {
   const [newTask, setNewTask] = useState({ title: '', description: '' });
+  const [tasks, setTasks] = useState<Tasks>([]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -12,10 +20,29 @@ export default function App() {
 
     if (error) {
       console.error('Error adding tadks:', error.message);
+      return;
     }
 
     setNewTask({ title: '', description: '' });
   }
+
+  async function fetchTasks() {
+    const { error, data } = await supabase
+      .from('tasks')
+      .select('*')
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.error('Error adding tadks:', error.message);
+      return;
+    }
+
+    setTasks(data);
+  }
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   return (
     <div className="min-h-screen bg-black py-8">
@@ -64,26 +91,31 @@ export default function App() {
         </form>
 
         {/* Sample Tasks */}
-        <div className="space-y-4">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Team meeting preparation
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Prepare agenda and slides for the weekly team standup meeting
-            </p>
-            <div className="flex gap-2">
-              <button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
-                <Edit size={18} />
-                Edit Task
-              </button>
-              <button className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
-                <Trash2 size={18} />
-                Delete Task
-              </button>
+
+        {tasks.length === 0 ? (
+          <p className="text-white">Loading Tasks...</p>
+        ) : (
+          tasks.map((task) => (
+            <div className="space-y-4">
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  {task.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{task.description}</p>
+                <div className="flex gap-2">
+                  <button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+                    <Edit size={18} />
+                    Edit Task
+                  </button>
+                  <button className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+                    <Trash2 size={18} />
+                    Delete Task
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ))
+        )}
       </div>
     </div>
   );
