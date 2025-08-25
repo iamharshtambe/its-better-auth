@@ -1,11 +1,20 @@
 import { Edit, Trash2, Plus } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
+import { supabase } from './supabase-client';
 
 export default function App() {
   const [newTask, setNewTask] = useState({ title: '', description: '' });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const { error } = await supabase.from('tasks').insert(newTask).single();
+
+    if (error) {
+      console.error('Error adding tadks:', error.message);
+    }
+
+    setNewTask({ title: '', description: '' });
   }
 
   return (
