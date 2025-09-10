@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function AuthClientPage() {
   const [isSignIn, setIsSignIn] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();
 
   // Get callback URL from search params (set by middleware)
 
-  const handleSocialAuth = async (provider: "google" | "github") => {
+  const handleSocialAuth = async (provider: 'google' | 'github') => {
     setIsLoading(true);
-    setError("");
+    setError('');
 
     try {
-      console.log("Logged in with", provider);
+      console.log('Logged in with', provider);
     } catch (err) {
       setError(
         `Error authenticating with ${provider}: ${
-          err instanceof Error ? err.message : "Unknown error"
+          err instanceof Error ? err.message : 'Unknown error'
         }`
       );
     } finally {
@@ -35,18 +35,18 @@ export default function AuthClientPage() {
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setError('');
 
     try {
       if (isSignIn) {
-        console.log("Signed in");
+        console.log('Signed in');
       } else {
-        console.log("Signed up");
+        console.log('Signed up');
       }
     } catch (err) {
       setError(
         `Authentication error: ${
-          err instanceof Error ? err.message : "Unknown error"
+          err instanceof Error ? err.message : 'Unknown error'
         }`
       );
     } finally {
@@ -60,12 +60,12 @@ export default function AuthClientPage() {
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {isSignIn ? "Welcome Back" : "Create Account"}
+              {isSignIn ? 'Welcome Back' : 'Create Account'}
             </h1>
             <p className="text-gray-600">
               {isSignIn
-                ? "Sign in to your account to continue"
-                : "Sign up to get started with better-auth"}
+                ? 'Sign in to your account to continue'
+                : 'Sign up to get started with better-auth'}
             </p>
           </div>
 
@@ -96,7 +96,7 @@ export default function AuthClientPage() {
           {/* Social Authentication */}
           <div className="space-y-3">
             <button
-              onClick={() => handleSocialAuth("google")}
+              onClick={() => handleSocialAuth('google')}
               disabled={isLoading}
               className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
@@ -122,7 +122,7 @@ export default function AuthClientPage() {
             </button>
 
             <button
-              onClick={() => handleSocialAuth("github")}
+              onClick={() => handleSocialAuth('github')}
               disabled={isLoading}
               className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-900 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
@@ -170,7 +170,7 @@ export default function AuthClientPage() {
                   required={!isSignIn}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3 py-2 border text-black border-gray-300 rounded-lg text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -207,7 +207,7 @@ export default function AuthClientPage() {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete={isSignIn ? "current-password" : "new-password"}
+                autoComplete={isSignIn ? 'current-password' : 'new-password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -243,12 +243,12 @@ export default function AuthClientPage() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  {isSignIn ? "Signing in..." : "Creating account..."}
+                  {isSignIn ? 'Signing in...' : 'Creating account...'}
                 </div>
               ) : isSignIn ? (
-                "Sign In"
+                'Sign In'
               ) : (
-                "Create Account"
+                'Create Account'
               )}
             </button>
           </form>
@@ -259,14 +259,14 @@ export default function AuthClientPage() {
               type="button"
               onClick={() => {
                 setIsSignIn(!isSignIn);
-                setError(""); // Clear any previous errors
-                setName(""); // Clear name when switching modes
+                setError(''); // Clear any previous errors
+                setName(''); // Clear name when switching modes
               }}
               className="text-indigo-600 hover:text-indigo-500 text-sm font-medium transition-colors"
             >
               {isSignIn
                 ? "Don't have an account? Sign up"
-                : "Already have an account? Sign in"}
+                : 'Already have an account? Sign in'}
             </button>
           </div>
         </div>
