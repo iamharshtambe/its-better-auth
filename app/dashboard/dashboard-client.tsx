@@ -1,5 +1,6 @@
 'use client';
 
+import { signOut } from '@/lib/actions/auth-actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -9,9 +10,10 @@ export default function DashboardClientPage() {
 
   // Redirect to auth if not authenticated
 
-  const handleSignOut = async () => {
-    alert('Signed out');
-  };
+  async function handleSignOut() {
+    await signOut();
+    router.push('/auth');
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
