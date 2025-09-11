@@ -4,5 +4,6 @@ node_modules
 
 /lib/generated/prisma
 
-.env
+.env.local
+
 /lib/generated/prisma
