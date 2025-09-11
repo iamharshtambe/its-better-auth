@@ -9,5 +9,5 @@ export default async function DashboardPage() {
   if (!session) {
     redirect('auth');
   }
-  return <DashboardClientPage />;
+  return <DashboardClientPage session={session} />;
 }
