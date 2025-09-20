@@ -18,6 +18,7 @@ export function applySchema(dbInstance: Database) {
 
 export function dbConnection(): Database {
   if (!db) {
+    console.log(`Opening database at: ${dbPth}`);
     db = new Database(dbPth);
     db.run('PRAGMA journal_mode = WAL;');
     applySchema(db);
