@@ -1,9 +1,0 @@
-node_modules
-
-.next
-
-/lib/generated/prisma
-
-.env.local
-
-/lib/generated/prisma
