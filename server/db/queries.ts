@@ -1,5 +1,5 @@
 import { desc } from 'drizzle-orm';
-import { db } from '.';
+import { db } from './db';
 import { todosTable } from './schema';
 
 export async function getTodos() {
