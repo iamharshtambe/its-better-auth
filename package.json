@@ -6,10 +6,13 @@
     "dev": "concurrently \"bun run server\" \"bun run client\""
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.1",
+    "drizzle-orm": "^0.44.5",
     "hono": "^4.9.8"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "drizzle-kit": "^0.31.4"
   }
 }
