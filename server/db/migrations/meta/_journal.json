@@ -8,6 +8,13 @@
       "when": 1758523309105,
       "tag": "0000_bumpy_king_cobra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1758555213520,
+      "tag": "0001_workable_longshot",
+      "breakpoints": true
     }
   ]
 }
