@@ -3,7 +3,9 @@
   "scripts": {
     "server": "bun run --hot server/index.ts",
     "client": "cd client && bun run dev",
-    "dev": "concurrently \"bun run server\" \"bun run client\""
+    "dev": "concurrently \"bun run server\" \"bun run client\"",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
