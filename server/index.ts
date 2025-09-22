@@ -3,7 +3,7 @@ import { getTodos } from './db/queries';
 
 const app = new Hono();
 
-app.get('/api/todos', async (c) => {
+const router = app.get('/api/todos', async (c) => {
   try {
     const todos = await getTodos();
     return c.json(todos);
@@ -13,4 +13,5 @@ app.get('/api/todos', async (c) => {
   }
 });
 
+export type AppType = typeof router;
 export default app;
