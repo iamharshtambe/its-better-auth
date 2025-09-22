@@ -3,10 +3,11 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanstackDevtools } from '@tanstack/react-devtools'
 
 import Header from '../components/Header'
+import Container from '@/components/Container'
 
 export const Route = createRootRoute({
   component: () => (
-    <>
+    <Container>
       <Header />
       <Outlet />
       <TanstackDevtools
@@ -20,6 +21,6 @@ export const Route = createRootRoute({
           },
         ]}
       />
-    </>
+    </Container>
   ),
 })
