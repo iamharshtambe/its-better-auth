@@ -6,7 +6,8 @@
     "dev": "concurrently \"bun run server\" \"bun run client\"",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "bun run ./scripts/seed-db.script.ts"
+    "db:seed": "bun run ./scripts/seed-db.script.ts",
+    "open-auth-docs": "open-cli http://localhost:3000/api/auth/reference"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
@@ -18,6 +19,7 @@
     "@types/bun": "latest",
     "concurrently": "^9.2.1",
     "drizzle-kit": "^0.31.4",
-    "drizzle-seed": "^0.3.1"
+    "drizzle-seed": "^0.3.1",
+    "open-cli": "^8.0.0"
   }
 }
