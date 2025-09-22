@@ -41,7 +41,7 @@ function RouteComponent() {
     )
   }
 
-  if (isSuccess && (!data || data.length === 0)) {
+  if (isSuccess && data.length === 0) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center text-gray-600 bg-gray-50 p-8 rounded-lg shadow-sm border border-gray-200">
