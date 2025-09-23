@@ -23,7 +23,7 @@ function RouteComponent() {
     })
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
 
@@ -35,7 +35,7 @@ function RouteComponent() {
     setLoading(true)
 
     try {
-      authClient.signUp.email({
+      await authClient.signUp.email({
         name,
         email,
         password,
