@@ -1,6 +1,14 @@
 import { Link } from '@tanstack/react-router'
+import { LogIn, LogOut } from 'lucide-react'
+import { authClient } from '@/lib/auth-client'
 
 export default function Header() {
+  const { data: session } = authClient.useSession()
+
+  async function handleLogOut() {
+    await authClient.signOut()
+  }
+
   return (
     <nav className="flex items-center justify-between px-4 py-2">
       <h1 className="text-3xl font-bold">Todos</h1>
@@ -17,6 +25,19 @@ export default function Header() {
             Todos
           </li>
         </Link>
+
+        {session ? (
+          <button
+            onClick={handleLogOut}
+            className="flex items-center text-red-500 hover:text-red-700"
+          >
+            <LogOut />
+          </button>
+        ) : (
+          <Link to="/signin" className="flex items-center link link-primary">
+            <LogIn />
+          </Link>
+        )}
       </ul>
     </nav>
   )
