@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
 import { authClient } from '@/lib/auth-client'
 
 export const Route = createFileRoute('/signup')({
@@ -12,8 +12,16 @@ function RouteComponent() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter()
+  const { data: session } = authClient.useSession()
+
+  if (session) {
+    router.navigate({
+      to: '/todos',
+    })
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -23,6 +31,8 @@ function RouteComponent() {
       setError('Password does not match')
       return
     }
+
+    setLoading(true)
 
     try {
       authClient.signUp.email({
@@ -37,6 +47,8 @@ function RouteComponent() {
     } catch (err) {
       setError('An unexpected error occur')
       console.log('Error', err)
+    } finally {
+      setLoading(true)
     }
   }
 
@@ -60,6 +72,7 @@ function RouteComponent() {
               placeholder="Full Name"
               required
               minLength={2}
+              disabled={loading}
             />
           </label>
           <div className="validator-hint hidden">Enter your name</div>
@@ -73,6 +86,7 @@ function RouteComponent() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="mail@site.com"
+              disabled={loading}
               required
             />
           </label>
@@ -89,6 +103,7 @@ function RouteComponent() {
               placeholder="Password"
               required
               minLength={6}
+              disabled={loading}
             />
           </label>
           <div className="validator-hint hidden">
@@ -104,6 +119,7 @@ function RouteComponent() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
+              disabled={loading}
               required
             />
           </label>
@@ -111,9 +127,29 @@ function RouteComponent() {
         </div>
 
         {/* Submit */}
-        <button className="btn btn-neutral w-full" type="submit">
-          Create Account
+        <button
+          className="btn btn-neutral w-full"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              <span className="ml-2">Creating account...</span>
+            </>
+          ) : (
+            'Sign Up'
+          )}
         </button>
+
+        <div className="mt-6 text-center text-sm">
+          <p className="text-base-content/70">
+            Already have an account?{' '}
+            <Link to="/signin" className="link link-primary">
+              Sign in
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   )
