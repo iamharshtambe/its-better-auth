@@ -4,6 +4,13 @@ import * as schema from '../server/db/schema';
 
 async function seedDb() {
   await seed(db, schema).refine((funcs) => ({
+    user: {
+      columns: {},
+      count: 10,
+      with: {
+        todosTable: 10,
+      },
+    },
     todosTable: {
       columns: {
         title: funcs.valuesFromArray({
