@@ -15,6 +15,13 @@
       "when": 1758555213520,
       "tag": "0001_workable_longshot",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1758728562499,
+      "tag": "0002_lucky_kylun",
+      "breakpoints": true
     }
   ]
 }

@@ -10,6 +10,10 @@ import {
 export const todosTable = pgTable('todos', {
   id: uuid().primaryKey().defaultRandom(),
 
+  user_id: text()
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
+
   title: varchar({ length: 500 }).notNull(),
 
   description: varchar({ length: 1000 }),
