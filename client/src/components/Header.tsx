@@ -20,7 +20,11 @@ export default function Header() {
           </li>
         </Link>
 
-        <Link to="/todos" activeProps={{ className: 'font-bold' }}>
+        <Link
+          to="/todos"
+          activeProps={{ className: 'font-bold' }}
+          disabled={!session}
+        >
           <li className="hover:border px-1 hover:rounded-2xl hover:bg-neutral-200">
             Todos
           </li>

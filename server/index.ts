@@ -6,7 +6,7 @@ const app = new Hono();
 
 const router = app
   .on(['POST', 'GET'], '/api/auth/*', (c) => auth.handler(c.req.raw))
-  .route('/todos', todos);
+  .route('/api/todos', todos);
 
 export type AppType = typeof router;
 export default app;
