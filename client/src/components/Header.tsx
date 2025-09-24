@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { LogIn, LogOut } from 'lucide-react'
+import { LogIn, LogOut, ShieldAlert } from 'lucide-react'
 import { authClient } from '@/lib/auth-client'
 
 export default function Header() {
@@ -29,6 +29,15 @@ export default function Header() {
             Todos
           </li>
         </Link>
+
+        {!session && (
+          <div
+            className="tooltip tooltip-bottom"
+            data-tip="Must be signed in to access"
+          >
+            <ShieldAlert />
+          </div>
+        )}
 
         {session ? (
           <button
