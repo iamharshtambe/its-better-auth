@@ -1,5 +1,5 @@
 {
-  "name": "this-is-auth",
+  "name": "its-auth",
   "scripts": {
     "server": "bun run --hot server/index.ts",
     "client": "cd client && bun run dev",
