@@ -48,7 +48,7 @@ function RouteComponent() {
       setError('An unexpected error occur')
       console.log('Error', err)
     } finally {
-      setLoading(true)
+      setLoading(false)
     }
   }
 
